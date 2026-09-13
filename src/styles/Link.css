@@ -1,0 +1,277 @@
+/* =============================================================
+   SenPlay — Link Page
+   Dark theme, pixel/8-bit brand title, card-style external links.
+   ============================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+/* -----------------------------------------------------------------------
+   Global reset + scrollbar
+   Ditaruh di luar .linkpage karena html/body & scrollbar tidak bisa
+   akses CSS variable yang di-scope ke .linkpage.
+   ----------------------------------------------------------------------- */
+
+html {
+  background-color: #0d1017;
+  /* Firefox: thumb color, track color */
+  scrollbar-color: #4fe0c8 #141924;
+  scrollbar-width: thin;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0d1017;
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #141924;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4fe0c8;
+  border-radius: 999px;
+  border: 3px solid #141924;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #9a8cf9;
+}
+
+.linkpage {
+  --font-mono: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+  --font-pixel: "Press Start 2P", "SFMono-Regular", monospace;
+  --color-bg: #0d1017;
+  --color-surface: #141924;
+  --color-text-primary: #eef0f6;
+  --color-text-secondary: #9aa2b8;
+  --color-text-muted: #69708a;
+  --color-accent: #4fe0c8;
+  --color-violet: #9a8cf9;
+  --color-border: rgba(255, 255, 255, 0.08);
+
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.06) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+  color: var(--color-text-primary);
+  padding: 4.5rem 1.5rem 5rem;
+  overflow: hidden;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+}
+
+.linkpage__glow {
+  position: absolute;
+  top: -4rem;
+  left: 50%;
+  width: 40rem;
+  height: 40rem;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    circle,
+    rgba(79, 224, 200, 0.16) 0%,
+    rgba(154, 140, 249, 0.09) 45%,
+    transparent 72%
+  );
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.linkpage__container {
+  position: relative;
+  z-index: 1;
+  max-width: 30rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ------------------------------------------------------------- Avatar */
+
+.linkpage__avatar-ring {
+  width: 8.5rem;
+  height: 8.5rem;
+  border-radius: 999px;
+  padding: 3px;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-violet));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.linkpage__avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 3px solid var(--color-bg);
+  display: block;
+}
+
+/* ------------------------------------------------------------- Brand */
+
+.linkpage__brand {
+  margin: 1.5rem 0 0;
+  font-family: var(--font-pixel);
+  font-size: clamp(1.375rem, 6vw, 2.25rem);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35);
+}
+
+.linkpage__badge {
+  margin: 0.875rem 0 0;
+  font-family: var(--font-pixel);
+  font-size: 0.625rem;
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+  color: var(--color-text-primary);
+}
+
+.linkpage__desc {
+  margin: 1rem 0 0;
+  max-width: 24rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+.linkpage__divider {
+  width: 100%;
+  height: 1px;
+  margin: 2rem 0 1.5rem;
+  background: var(--color-border);
+  border: none;
+}
+
+/* ------------------------------------------------------------- Links */
+
+.linkpage__list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.linkpage__card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.125rem;
+  border-radius: 0.875rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  text-decoration: none;
+  text-align: left;
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.linkpage__card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+  background: rgba(79, 224, 200, 0.05);
+}
+
+.linkpage__card:active {
+  transform: translateY(0);
+}
+
+.linkpage__card:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.linkpage__card-icon {
+  flex: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(154, 140, 249, 0.12);
+  color: var(--color-violet);
+}
+
+.linkpage__card-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.linkpage__card-title {
+  display: block;
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.linkpage__card-subtitle {
+  display: block;
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.linkpage__card-arrow {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.625rem;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.linkpage__card:hover .linkpage__card-arrow {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: translate(2px, -2px);
+}
+
+/* ------------------------------------------------------------- Responsive */
+
+@media (max-width: 480px) {
+  .linkpage {
+    padding: 3.5rem 1.25rem 4rem;
+  }
+
+  .linkpage__avatar-ring {
+    width: 7rem;
+    height: 7rem;
+  }
+
+  .linkpage__card {
+    padding: 0.875rem 1rem;
+  }
+}
